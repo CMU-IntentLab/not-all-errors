@@ -195,7 +195,7 @@
 			<tr>
 				<td>
 					<center>
-						<img class="round" style="width:500px" src="./resources/hardwareCORL2024.png" />
+						<img class="round" style="width:850px" src="./resources/hardwareCORL2024.png" />
 					</center>	
 				</td>
 			</tr>
@@ -354,7 +354,7 @@
 	<table align=center width=850px>
 
 		<center>
-		  <h2> Comparison to Baselines</h2>
+		  <h1> Comparison to Baselines</h1>
 		</center>	
 		<tr>
 			<td>		
@@ -373,8 +373,9 @@
 				We find that <span style="color: rgb(255,102,0)">GRM</span> and <span style="color: rgb(18, 178, 235)">RM</span> identify 19/20 
 				of the same scenarios as failures. Howeever, the scenario uniquely identified by <span style="color: rgb(255,102,0)">GRM</span>
 				induces a safety-critical failure whereas the scenario uniquely identified by <span style="color: rgb(18, 178, 235)">RM</span> is merely
-				inefficient. This illustrates that the mapping to probability space indeed calibrates decisions across disparate contexts. One example scenario
-				identified by <span style="color: rgb(112,48,160)">ADE</span> is shown above. The metric is dominated by mispredictions of vehicles that cannot affect the
+				inefficient. This illustrates that the mapping to probability space indeed calibrates decisions across disparate contexts. <span style="color: rgb(112,48,160)">ADE</span> identify 
+				35% of the same scenarios as the two regret metrics, however the scenarios it uniquely identifies tend to be dominated by irrelevant mispredictions. One such example 
+				is shown above. The prediction error is dominated by mispredictions of a vehicle in another lane that cannot affect the
 				robot's performance, supporting our claim that component-level metrics are not sufficient for evaluating system-level performance.
 				
 			</td>
@@ -382,7 +383,7 @@
 	</table>
 	<table align=center width=850px>
 		<center>
-			<h2> High-regret data for Fine-tuning</h2>
+			<h1> High-regret data for Fine-tuning</h1>
 		  </center>
 		<tr>
 			<td>			
