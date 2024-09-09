@@ -223,9 +223,9 @@
 		  </tr>
 		</table>
 	</center>
-	
+	<br>
 	<hr>
-
+	<br>
 	<table align=center width=850px>
 		<center>
 		  <h1>Method Overview</h1>
@@ -233,17 +233,18 @@
 
 		<tr>
 		  <td>
-			<br><br>
+			<br>
 			We formalize system-level prediction failures via the mathematical notion of regret. Canonically, regret measures the reward 
 			difference between the optimal action the robot	could take in hindsight and the executed action the robot took under 
 			uncertainty. However relying on reward functions to calculate regret is incompatible with reward-free generative planners and 
 			may be miscalibrated between disparate contexts with different reward scales.
-
+			<br>
 			<center>
 				<img class="round" style="width:500px" src="./resources/Illustrative.png" />
 			</center>		
+			<br>
 			Consider the figure above. The robot's predictions (left column) were incorrect in both settings and the realized reward 
-			(right column) induced the same regret (11.4 vs 11.7). However, although the robot's actions were suboptimal in both scenarios,
+			(right column) induced similar regrets (11.4 vs 11.7). Although the robot's actions were suboptimal in both scenarios,
 			canonical regret is unable to identify that the top scenario is more severly suboptimal than the bottom situation.
 
 			To remedy this we derive a <i>generalized</i> regret metric that evaluates the quality of a decision based on its likelihood space 
@@ -272,11 +273,13 @@
 		</center>
 		<tr>
 			<td>
+				<br>
 				We showcase the capability of our method on hardware using an Interbotix LoCoBot using a reward-free generative planner (details
 				in the paper). We utilize onboard sensing (Lidar and RGB-D) to record the robot and human's position during the interaction.
 			</td>	
 		</tr>
 	</table>
+	<br>
 	<table align=center width=850px>
 		<tr>
             <td style="vertical-align: top;">
@@ -317,6 +320,41 @@
 	<br>
 	<hr>
 	<br>
+
+	<table align=center width=850px>
+		<center>
+		  <h1>Simulation Case Study</h1>
+		</center>
+		<tr>
+			<td>
+				We also show-case one potential usage of the data extracted by our generalized regret metric for fine-tuning human trajectory predictors 
+				in a simulated autonomous driving setting.
+				We utilize  <a
+				href="https://github.com/NVlabs/traffic-behavior-simulation"> closed-loop simulation</a> for reactive human behaviors. The robot's prediction
+				module in an ego-conditioned Agentformer model trained on NuScenes, and we use a cost-based MPC planner with hand-tuned rewards that
+				takes in predictions and outputs robot actions.
+
+
+				Out of 100 scenarios, we identified the top p=20 quantile as system-level trajectory prediction failures. Different subsets of 17 interactions
+				from the deployment data were then used to fine-tune the Agentformer model and redeployed.
+				<br><br>
+				<center>
+					<img class="round" style="width:850px" src="./resources/qualtitative.png" />
+				</center>			
+				<br><br>
+				Qualitatively, as the proportion of high-regret data present in the fine-tuning dataset increases, the robot's behavior improves (example above). 
+				Quantitatively, we find that fine-tuning on high-regret data outperforms fine-tuning on low-regret and random subsets of deployment data, and is competitive
+				with fine-tuning on the entire deployment dataset, in terms of reduced collision cost and regret. 
+
+				<br><br>
+				<center>
+					<img class="round" style="width:850px" src="./resources/table.png" />
+				</center>			
+				<br><br>
+				
+			</td>
+		</tr>
+	</table>
 
 	<table align=center width=900px>
 		<tr>
