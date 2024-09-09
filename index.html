@@ -336,15 +336,15 @@
 
 
 				Out of 100 scenarios, we identified the top p=20 quantile as system-level trajectory prediction failures. Different subsets of 17 interactions
-				from the deployment data were then used to fine-tune the Agentformer model and redeployed.
+				from the deployment data were then used to fine-tune the Agentformer model and redeployed in closed-loop simulation.
 				<br><br>
 				<center>
-					<img class="round" style="width:200px" src="./resources/qualtitative.png" />
+					<img class="round" style="width:250px" src="./resources/qualtitative.png" />
 				</center>			
 				<br><br>
 				Qualitatively, as the proportion of high-regret data present in the fine-tuning dataset increases, the robot's behavior improves (example above). 
-				Quantitatively, we find that fine-tuning on high-regret data outperforms fine-tuning on low-regret and random subsets of deployment data, and is competitive
-				with fine-tuning on the entire deployment dataset, in terms of reduced collision cost and regret. 
+				In terms of quantitative reductions in collision cost and regret, we find that fine-tuning on high-regret data outperforms fine-tuning on low-regret and random subsets of deployment data, and is competitive
+				with fine-tuning on the entire deployment dataset despite using 77% less data.  
 
 				<br><br>
 				<center>
