@@ -228,19 +228,36 @@
 
 	<table align=center width=850px>
 		<center>
-		  <h1>Method Overview</h1>
+		  <h1>Method</h1>
 		</center>
 		<tr>
 		  <td>
 			<br><br>
-			We derive a <i>generalized</i> regret metrics that evaluates the quality of a decision on probability space 
-			rather than absolute reward space. 
+			We formalize system-level prediction failures via the mathematical notion of regret. Canonically, regret measures the reward 
+			difference between the optimal action the robot	could take in hindsight and the executed action the robot took under 
+			uncertainty. However relying on reward functions to calculate regret is incompatible with reward-free generative planners and 
+			may be miscalibrated between disparate contexts with different reward scales.
+
+			<center>
+				<img class="round" style="width:500px" src="./resources/Illustrative.png" />
+			</center>		
+			Consider the figure above. The robot's predictions (left column) were incorrect in both settings and the realized reward 
+			(right column) induced the same regret (11.4 vs 11.7). However, although the robot's actions were suboptimal in both scenarios,
+			canonical regret is unable to identify that the top scenario is more severly suboptimal than the bottom situation.
+
+			To remedy this we derive a <i>generalized</i> regret metric that evaluates the quality of a decision based on its likelihood space 
+			rather than its absolute reward. 
 			<br><br>
-			\[ \text{Reg}_t(d) := \max_{\mathbf{a}^R_t} \mathbb{P}_\phi(\mathbf{a}^\text{R}_t \mid \mathbf{a}^{\text{H}_1:\text{H}_M}_t, \mathbf{\hat{s}}_t, C) - \mathbb{P}_\phi(\mathbf{\hat{a}}^\text{R}_t \mid \mathbf{a}^{\text{H}_1:\text{H}_M}_t, \mathbf{\hat{s}}_t, C) \]
+			<center>
+				<img class="round" style="width:850px" src="./resources/regret_eq.png" />
+			</center>			
 			<br><br>
 
-			This mapping of regret to probability space calibrates regret measurements across disparate deployment contexts and is amenable with
-			both reward-based and reward-free (i.e., generative) planners.
+			This probabilistic interpretation normalizes the quality of a decision
+			relative to the context-dependent behavior distribution and is a principled way to place all decision
+			comparisons on the same scale—a value between zero and one. Furthermore, this mapping to probabilities renders this regret metric
+			compatibly with reward-free generative planners. Referring back to the figure above, our generalized metric can disambiguate between
+			the two contexts and assigns the top scenario with a regret of 0.56 and the bottom scenario with regret 0.34.
 	
 		  </td>
 		</tr>
