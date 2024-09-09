@@ -377,9 +377,9 @@
 				We find that <span style="color: rgb(255,102,0)">GRM</span> and <span style="color: rgb(18, 178, 235)">RM</span> identify 19/20 
 				of the same scenarios as failures. Howeever, the scenario uniquely identified by <span style="color: rgb(255,102,0)">GRM</span>
 				induces a safety-critical failure whereas the scenario uniquely identified by <span style="color: rgb(18, 178, 235)">RM</span> is merely
-				inefficient. This illustrates that the mapping to probability space indeed calibrates decisions across disparate contexts. <span style="color: rgb(112,48,160)">ADE</span> identify 
-				35% of the same scenarios as the two regret metrics, however the scenarios it uniquely identifies tend to be dominated by irrelevant mispredictions. One such example 
-				is shown above. The prediction error is dominated by mispredictions of a vehicle in another lane that cannot affect the
+				inefficient. This illustrates that the mapping to probability space indeed calibrates decisions across disparate contexts. The <span style="color: rgb(112,48,160)">ADE</span> metric 
+				identifies 35% of the same scenarios as the two regret metrics. One scenario uniquely identified by <span style="color: rgb(112,48,160)">ADE</span> is shown above where 
+				the prediction error is dominated by mispredictions of a vehicle in another lane that cannot affect the
 				robot's performance, supporting our claim that component-level metrics are not sufficient for evaluating system-level performance.
 				
 			</td>
@@ -387,13 +387,11 @@
 	</table>
 	<table align=center width=850px>
 		<center>
-			<h2> High-regret data for Fine-tuning</h2>
+			<h2> High-regret Data for Fine-tuning</h2>
 		  </center>
 		<tr>
 			<td>			
-
-				Out of 100 scenarios, we identified the top p=20 quantile as system-level trajectory prediction failures.
-				Different subsets of 17 interactions from the deployment data were then used to fine-tune the Agentformer model and redeployed in closed-loop simulation.
+				Different subsets of 17 interactions from the deployment dataset were used to fine-tune the Agentformer model for redeployment in closed-loop simulation.
 				<br><br>
 				<center>
 					<img class="round" style="width:250px" src="./resources/qualtitative.png" />
