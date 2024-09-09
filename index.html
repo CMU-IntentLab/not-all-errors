@@ -348,8 +348,7 @@
 		</center>
 		<tr>
 			<td>
-				We also show-case one potential usage of the data extracted by our generalized regret metric for fine-tuning human trajectory predictors 
-				in a simulated autonomous driving setting.We utilize  <a href="https://github.com/NVlabs/traffic-behavior-simulation"> closed-loop simulation</a> 
+				We also investigate our generalized regret metric in autonomous driving scenarios. We utilize  <a href="https://github.com/NVlabs/traffic-behavior-simulation"> closed-loop simulation</a> 
 				for reactive human behaviors. The robot's prediction module in an ego-conditioned Agentformer model trained on NuScenes, and we use a cost-based MPC planner with hand-tuned rewards that
 				takes in predictions and outputs robot actions. The robot was deployed in 100 closed-loop interactions on scenarios from NuScenes.
 			</td>
@@ -391,7 +390,8 @@
 		  </center>
 		<tr>
 			<td>			
-				Different subsets of 17 interactions from the deployment dataset were used to fine-tune the Agentformer model for redeployment in closed-loop simulation.
+				We also show-case one potential usage of the data extracted by our generalized regret metric for fine-tuning human trajectory predictors.
+				Different subsets of 17 interactions from the deployment data were then used to fine-tune the Agentformer model and redeployed in closed-loop simulation.
 				<br><br>
 				<center>
 					<img class="round" style="width:250px" src="./resources/qualtitative.png" />
