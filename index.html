@@ -234,18 +234,18 @@
 		<tr>
 		  <td>
 			<br>
-			We formalize system-level prediction failures via the mathematical notion of regret. Canonically, regret measures the reward 
+			We formalize system-level prediction failures via the mathematical notion of regret. Canonically, regret measures the <i>reward</i> 
 			difference between the optimal action the robot	could take in hindsight and the executed action the robot took under 
-			uncertainty. However relying on reward functions to calculate regret is incompatible with reward-free generative planners and 
+			uncertainty. However relying on reward functions to calculate regret is inherently incompatible with generative planners that are reward-free and 
 			may be miscalibrated between disparate contexts with different reward scales.
 			<br>
 			<center>
 				<img class="round" style="width:500px" src="./resources/Illustrative.png" />
 			</center>		
 			<br>
-			Consider the figure above. The robot's predictions (left column) were incorrect in both settings and the realized reward 
-			(right column) induced similar regrets (11.4 vs 11.7). Although the robot's actions were suboptimal in both scenarios,
-			canonical regret is unable to identify that the top scenario is more severly suboptimal than the bottom situation.
+			Consider the two simulated interactions above. Although the robot's actions were suboptimal in both scenarios,
+			canonical regret is unable to identify that driving toward stopped truck (top) is more severly suboptimal than an 
+			unnecessarily aggressive overtake (bottom) and assigns the scenarios a similar regret of 11.4 and 11.7, respectively.
 
 			To remedy this we derive a <i>generalized</i> regret metric that evaluates the quality of a decision based on its likelihood space 
 			rather than its absolute reward. 
@@ -258,7 +258,7 @@
 			This probabilistic interpretation normalizes the quality of a decision
 			relative to the context-dependent behavior distribution and is a principled way to place all decision
 			comparisons on the same scale—a value between zero and one. Furthermore, this mapping to probabilities renders this regret metric
-			compatibly with reward-free generative planners. Referring back to the figure above, our generalized metric can disambiguate between
+			compatible with reward-free generative planners. Referring back to the figure above, our generalized metric can disambiguate between
 			the two contexts and assigns the top scenario with a regret of 0.56 and the bottom scenario with regret 0.34.
 	
 		  </td>
@@ -275,7 +275,10 @@
 			<td>
 				<br>
 				We showcase the capability of our method on hardware using an Interbotix LoCoBot using a reward-free generative planner (details
-				in the paper). We utilize onboard sensing (Lidar and RGB-D) to record the robot and human's position during the interaction.
+				in the paper) that takes in human heading and a goal location as input. The policy trained in simulation outputs a joint human-robot 
+				trajectory that serves as both a prediction and plan. <!--The robot is tasked with reaching brown door unless it predicts that
+				doing so will cause a collision.--> We deploy the policy in real and utilize onboard sensing (Lidar and RGB-D) to record the robot 
+				and human's states during the interaction.
 			</td>	
 		</tr>
 	</table>
@@ -287,7 +290,7 @@
 					Accurate Prediction
 				</center>
                 <video width="250" controls>
-                    <source src="./resources/accurate-anon.mp4" type="video/mp4">
+                    <source src="./resources/accurate.mov" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <div class="caption" style="width: 250px;"> <br>The robot accurately predicts the human will block it's goal, and proceeds straight. This incurs a low regret (0.078 on a scale of 0 to 1)
@@ -298,7 +301,7 @@
 					Irrelevant Mis-prediction
 				</center>
                 <video width="250" controls>
-                    <source src="./resources/non-sys-2-anon.mp4" type="video/mp4">
+                    <source src="./resources/irrel.mov" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <div class="caption" style="width: 250px;"> <br>The robot incorrectly predicts the human will go straight and moves to its goal location. The prediction failure is irrelevant to robot performance and gets low regret (0.053 on a scale of 0 to 1).
@@ -309,7 +312,7 @@
 					System-level Failure
 				</center>
                 <video width="250" controls>
-                    <source src="./resources/sys-1-anon.mp4" type="video/mp4">
+                    <source src="./resources/sys-level.mov" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <div class="caption" style="width: 250px;"><br>The robot incorrectly predicts the the human will block its goal location and collides with the human. The robot's behavior is unlikely conditioned on the human's ground truth behavior and is assigned high regret (0.307 on a scale of 0 to 1)
@@ -332,19 +335,16 @@
 				We utilize  <a
 				href="https://github.com/NVlabs/traffic-behavior-simulation"> closed-loop simulation</a> for reactive human behaviors. The robot's prediction
 				module in an ego-conditioned Agentformer model trained on NuScenes, and we use a cost-based MPC planner with hand-tuned rewards that
-				takes in predictions and outputs robot actions.
-
-
-				Out of 100 scenarios, we identified the top p=20 quantile as system-level trajectory prediction failures. Different subsets of 17 interactions
-				from the deployment data were then used to fine-tune the Agentformer model and redeployed in closed-loop simulation.
+				takes in predictions and outputs robot actions. Out of 100 scenarios, we identified the top p=20 quantile as system-level trajectory prediction failures.
+				Different subsets of 17 interactions from the deployment data were then used to fine-tune the Agentformer model and redeployed in closed-loop simulation.
 				<br><br>
 				<center>
 					<img class="round" style="width:250px" src="./resources/qualtitative.png" />
 				</center>			
 				<br><br>
-				Qualitatively, as the proportion of high-regret data present in the fine-tuning dataset increases, the robot's behavior improves (example above). 
-				In terms of quantitative reductions in collision cost and regret, we find that fine-tuning on high-regret data outperforms fine-tuning on low-regret and random subsets of deployment data, and is competitive
-				with fine-tuning on the entire deployment dataset despite using 77% less data.  
+				Qualitatively, as the proportion of high-regret (orange) data present in the fine-tuning dataset increases, the robot's behavior improves (example above). 
+				In terms of quantitative reductions in collision cost and regret, we find that fine-tuning on high-regret data outperforms fine-tuning on low-regret (grey) 
+				and random subsets of deployment data, and is competitive with fine-tuning on the entire deployment dataset despite using 77% less data.  
 
 				<br><br>
 				<center>
