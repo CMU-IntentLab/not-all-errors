@@ -1,0 +1,299 @@
+<script src="http://www.google.com/jsapi" type="text/javascript"></script> 
+<script type="text/javascript">google.load("jquery", "1.3.2");</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
+
+<style type="text/css">
+	body {
+		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+		font-weight:300;
+		font-size:18px;
+		margin-left: auto;
+		margin-right: auto;
+		width: 1100px;
+	}
+	
+	h1 {
+		font-size:32px;
+		font-weight:300;
+	}
+	
+	.disclaimerbox {
+		background-color: #eee;		
+		border: 1px solid #eeeeee;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+		padding: 20px;
+	}
+
+	video.header-vid {
+		height: 140px;
+		border: 1px solid black;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+	}
+	
+	img.header-img {
+		height: 140px;
+		border: 1px solid black;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+	}
+	
+	img.rounded {
+		border: 1px solid #eeeeee;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+	}
+	
+	a:link,a:visited
+	{
+		color: #1367a7;
+		text-decoration: none;
+	}
+	a:hover {
+		color: #208799;
+	}
+	
+	td.dl-link {
+		height: 160px;
+		text-align: center;
+		font-size: 22px;
+	}
+	
+	.layered-paper-big { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+		box-shadow:
+		0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+		5px 5px 0 0px #fff, /* The second layer */
+		5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+		10px 10px 0 0px #fff, /* The third layer */
+		10px 10px 1px 1px rgba(0,0,0,0.35), /* The third layer shadow */
+		15px 15px 0 0px #fff, /* The fourth layer */
+		15px 15px 1px 1px rgba(0,0,0,0.35), /* The fourth layer shadow */
+		20px 20px 0 0px #fff, /* The fifth layer */
+		20px 20px 1px 1px rgba(0,0,0,0.35), /* The fifth layer shadow */
+		25px 25px 0 0px #fff, /* The fifth layer */
+		25px 25px 1px 1px rgba(0,0,0,0.35); /* The fifth layer shadow */
+		margin-left: 10px;
+		margin-right: 45px;
+	}
+
+	.paper-big { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+		box-shadow:
+		0px 0px 1px 1px rgba(0,0,0,0.35); /* The top layer shadow */
+
+		margin-left: 10px;
+		margin-right: 45px;
+	}
+
+
+	.layered-paper { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+		box-shadow:
+		0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+		5px 5px 0 0px #fff, /* The second layer */
+		5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+		10px 10px 0 0px #fff, /* The third layer */
+		10px 10px 1px 1px rgba(0,0,0,0.35); /* The third layer shadow */
+		margin-top: 5px;
+		margin-left: 10px;
+		margin-right: 30px;
+		margin-bottom: 5px;
+	}
+	
+	.vert-cent {
+		position: relative;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+	
+	hr
+	{
+		border: 0;
+		height: 1px;
+		background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+	}
+</style>
+
+<html>
+<head>
+	<title>Not All Errors Are Made Equal: A Regret Metric for Detecting System-level Trajectory Prediction Failures	</title>
+	<meta property="og:image" content="./resources/qualtitative.png"/> <!-- Facebook automatically scrapes this. Go to https://developers.facebook.com/tools/debug/ if you update and want to force Facebook to rescrape. -->
+	<meta property="og:title" content="Not All Errors Are Made Equal: A Regret Metric for Detecting System-level Trajectory Prediction Failures" />
+	<meta property="og:description" content="Robot decision-making increasingly relies on data-driven human prediction models when operating around people. While these models are known to mispredict in out-of-distribution interactions, only a subset of prediction errors impact downstream robot performance.  We propose characterizing such system-level prediction failures via the mathematical notion of regret: high-regret interactions are precisely those in which mispredictions degraded closed-loop robot performance. We further introduce a probabilistic generalization of regret that calibrates failure detection across disparate deployment contexts and renders regret compatible with reward-based and reward-free (e.g., generative) planners.  In simulated autonomous driving interactions, we showcase that our system-level failure metric can be used offline to automatically extract closed-loop human-robot interactions that state-of-the-art generative human predictors and robot planners previously struggled with. We further find that the very presence of high-regret data during human predictor fine-tuning is highly predictive of robot re-deployment performance improvements. Furthermore, fine-tuning with the informative but significantly smaller high-regret data (23% of deployment data) is competitive with fine-tuning on the full deployment dataset, indicating a promising avenue for efficiently mitigating system-level human-robot interaction failures." />
+
+	<!-- Get from Google Analytics -->
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src=""></script> 
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-75863369-6');
+	</script>
+</head>
+
+<body>
+	<br>
+	<center>
+		<span style="font-size:36px">Not All Errors Are Made Equal: A Regret Metric for Detecting System-level Trajectory Prediction Failures</span>
+		<table align=center width=600px>
+			<table align=center width=600px>
+				<tr>
+					<td align=center width=100px>
+						<center>
+							<span style="font-size:24px"><a href="https://kensukenk.github.io/">Kensuke Nakamura<sup>1</sup></a></span>
+						</center>
+					</td>
+					<td align=center width=100px>
+						<center>
+							<span style="font-size:24px"><a href="https://thomasrantian.github.io/">Ran Tian<sup>2</sup></a></span>
+						</center>
+					</td>
+					<td align=center width=100px>
+						<center>
+							<span style="font-size:24px"><a href="https://www.cs.cmu.edu/~abajcsy/">Andrea Bajcsy<sup>1</sup></a></span>
+						</center>
+					</td>
+				</tr>
+			</table>
+			<table align=center width=250px>
+				<tr>
+				  <td align=center width=250px>
+					<center>
+					  <span style="font-size:12px"> <sup>1</sup>Carnegie Mellon University <br>
+						<sup>2</sup>UC Berkeley</span>
+					</center>
+				  </td>
+				</tr>
+			  </table>
+
+			<table align=center width=250px>
+				<tr>
+					<td align=center width=120px>
+						<center>
+							<span style="font-size:24px"><a href=''>[Paper (coming soon)]</a></span>
+						</center>
+					</td>
+					<td align=center width=120px>
+						<center>
+							<span style="font-size:24px"><a href=''>[Code (coming soon)]</a></span><br>
+						</center>
+					</td>
+				</tr>
+			</table>
+		</table>
+	</center>
+
+
+	<center>
+		<!-- <table align=center width=850px>
+		  <tr>
+			<td width=260px>
+			  <center>
+				<video width="700" controls>
+				  <source src="./resources/Belief_Game.mp4" type=video/mp4>
+				</video>
+			  </center>
+			</td>
+		  </tr>
+		</table> -->
+		<table align=center width=850px>
+		  <tr>
+			<td>
+			  <br><br> Robot decision-making increasingly relies on data-driven human prediction models when operating around people. 
+			  While these models are known to mispredict in out-of-distribution interactions, only a subset of prediction errors impact 
+			  downstream robot performance.  We propose characterizing such system-level prediction failures via the mathematical notion
+			  of regret: high-regret interactions are precisely those in which mispredictions degraded closed-loop robot performance.
+			  We further introduce a probabilistic generalization of regret that calibrates failure detection across disparate deployment 
+			  contexts and renders regret compatible with reward-based and reward-free (e.g., generative) planners.  In simulated autonomous 
+			  driving interactions, we showcase that our system-level failure metric can be used offline to automatically extract closed-loop 
+			  human-robot interactions that state-of-the-art generative human predictors and robot planners previously struggled with. We 
+			  further find that the very presence of high-regret data during human predictor fine-tuning is highly predictive of robot 
+			  re-deployment performance improvements. Furthermore, fine-tuning with the informative but significantly smaller high-regret 
+			  data (23% of deployment data) is competitive with fine-tuning on the full deployment dataset, indicating a promising avenue 
+			  for efficiently mitigating system-level human-robot interaction failures.
+
+	
+			</td>
+		  </tr>
+		</table>
+	</center>
+	
+	<hr>
+
+	<table align=center width=850px>
+		<center>
+		  <h1>Method Overview</h1>
+		</center>
+		<tr>
+		  <td>
+			<br><br>
+			We derive a <i>generalized</i> regret metrics that evaluates the quality of a decision on probability space 
+			rather than absolute reward space. 
+			<br><br>
+			$$ {\text{Reg}_t(d) := \max_{\mathbf{a}^R_t} &~\mathbb{P}_\phi(\mathbf{a}^\text{R}_t \mid \mathbf{a}^{\text{H}_1:\text{H}_M}_t, \mathbf{\hat{s}}_t, C) - \mathbb{P}_\phi(\mathbf{\hat{a}}^\text{R}_t \mid \mathbf{a}^{\text{H}_1:\text{H}_M}_t, \mathbf{\hat{s}}_t, C)} $$
+			<br><br>
+
+			This mapping of regret to probability space calibrates regret measurements across disparate deployment contexts and is amenable with
+			both reward-based and reward-free (i.e., generative) planners.
+	
+		  </td>
+		</tr>
+	</table>
+	<br>
+
+	<table align=center width=850px>
+		<center>
+		  <h1>Hardware Experiments</h1>
+		</center>
+		<tr>
+            <td>
+                <video controls>
+                    <source src="./resources/accurate-anon.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="caption">The robot accurately predicts the human will block it's goal, and proceeds straight. This incurs a low regret (0.078 on a scale of 0 to 1)
+				</div>
+            </td>
+            <td>
+                <video controls>
+                    <source src="./resources/non-sys-2-anon.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="caption">The robot incorrectly predicts the human will go straight and moves to its goal location. The prediction failure is irrelevant to robot performance and gets low regret (0.053 on a scale of 0 to 1).
+				</div>
+            </td>
+            <td>
+                <video controls>
+                    <source src="./resources/sys-1-anon.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="caption">The robot incorrectly predicts the the human will block its goal location and collides with the human. The robot's behavior is unlikely conditioned on the human's ground truth behavior and is assigned high regret (0.307 on a scale of 0 to 1)
+				</div>
+            </td>
+        </tr>
+	</table>
+	<br>
+
+	<hr>
+	<br>
+
+	<table align=center width=900px>
+		<tr>
+			<td width=400px>
+				<left>
+					<center><h1>Acknowledgements</h1></center>
+					This template was originally made by <a href="http://web.mit.edu/phillipi/">Phillip Isola</a> and <a href="http://richzhang.github.io/">Richard Zhang</a> for a <a href="http://richzhang.github.io/colorization/">colorful</a> ECCV project; the code can be found <a href="https://github.com/richzhang/webpage-template">here</a>.
+				</left>
+			</td>
+		</tr>
+	</table>
+
+<br>
+</body>
+</html>
+
