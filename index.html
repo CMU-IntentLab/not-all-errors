@@ -231,6 +231,13 @@
 		  <h1>Method</h1>
 		</center>
 		<tr>
+			<td>
+				We showcase the capability of our method on hardware using an Interbotix LoCoBot using a reward-free generative planner (details
+				in the paper). We utilize onboard sensing (Lidar and RGB-D) to record the robot and human's position during deployment.
+			</td>	
+		</tr>
+
+		<tr>
 		  <td>
 			<br><br>
 			We formalize system-level prediction failures via the mathematical notion of regret. Canonically, regret measures the reward 
@@ -269,7 +276,7 @@
 		  <h1>Hardware Experiments</h1>
 		</center>
 		<tr>
-            <td>
+            <td style="vertical-align: top;">
                 <video width="250" controls>
                     <source src="./resources/accurate-anon.mp4" type="video/mp4">
                     Your browser does not support the video tag.
@@ -277,7 +284,7 @@
                 <div class="caption" style="width: 250px;">The robot accurately predicts the human will block it's goal, and proceeds straight. This incurs a low regret (0.078 on a scale of 0 to 1)
 				</div>
             </td>
-            <td>
+            <td style="vertical-align: top;">
                 <video width="250" controls>
                     <source src="./resources/non-sys-2-anon.mp4" type="video/mp4">
                     Your browser does not support the video tag.
@@ -285,7 +292,7 @@
                 <div class="caption" style="width: 250px;">The robot incorrectly predicts the human will go straight and moves to its goal location. The prediction failure is irrelevant to robot performance and gets low regret (0.053 on a scale of 0 to 1).
 				</div>
             </td>
-            <td>
+            <td style="vertical-align: top;">
                 <video width="250" controls>
                     <source src="./resources/sys-1-anon.mp4" type="video/mp4">
                     Your browser does not support the video tag.
