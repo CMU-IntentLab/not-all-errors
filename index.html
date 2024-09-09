@@ -345,15 +345,12 @@
 		<tr>
 			<td>
 				We also show-case one potential usage of the data extracted by our generalized regret metric for fine-tuning human trajectory predictors 
-				in a simulated autonomous driving setting.
-				We utilize  <a
-				href="https://github.com/NVlabs/traffic-behavior-simulation"> closed-loop simulation</a> for reactive human behaviors. The robot's prediction
-				module in an ego-conditioned Agentformer model trained on NuScenes, and we use a cost-based MPC planner with hand-tuned rewards that
+				in a simulated autonomous driving setting.We utilize  <a href="https://github.com/NVlabs/traffic-behavior-simulation"> closed-loop simulation</a> 
+				for reactive human behaviors. The robot's prediction module in an ego-conditioned Agentformer model trained on NuScenes, and we use a cost-based MPC planner with hand-tuned rewards that
 				takes in predictions and outputs robot actions. The robot was deployed in 100 closed-loop interactions on scenarios from NuScenes.
 			</td>
 		</tr>
 
-				
 		<center>
 		  <h2> Comparison to Baselines</h2>
 		</center>	
@@ -361,7 +358,30 @@
 			<td>		
 				We compared our generalized regret metric (<span style="color: rgb(255,102,0)">GRM</span>) against three baselines: canonical regret
 				(<span style="color: rgb(18, 178, 235)">RM</span>), <span style="color: rgb(112,48,160)">ADE</span> which is a component-level metric, and 
-				Task-relevant Failure Detection from Farid et. al (<span style="color: rgb(0.2, 0.2, 0.2)">TRFD</span>)
+				Task-relevant Failure Detection from Farid et. al (<span style="color: rgb(0.2, 0.2, 0.2)">TRFD</span>) which is an open-loop system-level metric.
+				We take the top p=20 quantile scenarios for <span style="color: rgb(255,102,0)">GRM</span>, <span style="color: rgb(18, 178, 235)">RM</span>, and <span style="color: rgb(112,48,160)">ADE</span>
+				as the identified failures. <span style="color: rgb(0.2, 0.2, 0.2)">TRFD</span> does not output a score but rather a label of prediction failures.
+				
+				<br><br>
+				<center>
+					<img class="round" style="width:250px" src="./resources/metric_comp.png" />
+				</center>			
+				<br><br>
+
+				We find that <span style="color: rgb(255,102,0)">GRM</span> and <span style="color: rgb(18, 178, 235)">RM</span> identify 19/20 
+				of the same scenarios as failures. Howeever, the scenario uniquely identified by <span style="color: rgb(255,102,0)">GRM</span>
+				induces a safety-critical failure whereas the scenario uniquely identified by <span style="color: rgb(18, 178, 235)">RM</span> is merely
+				inefficient. This illustrates that the mapping to probability space indeed calibrates decisions across disparate contexts. One example scenario
+				identified by <span style="color: rgb(112,48,160)">ADE</span> is shown above. The metric is dominated by mispredictions of vehicles that cannot affect the
+				robot's performance, supporting our claim that component-level metrics are not sufficient for evaluating system-level performance.
+				
+			</td>
+		</tr>
+		<center>
+			<h2> High-regret data for Fine-tuning</h2>
+		  </center>
+		<tr>
+			<td>			
 
 				Out of 100 scenarios, we identified the top p=20 quantile as system-level trajectory prediction failures.
 				Different subsets of 17 interactions from the deployment data were then used to fine-tune the Agentformer model and redeployed in closed-loop simulation.
