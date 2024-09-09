@@ -140,7 +140,7 @@
 <body>
 	<br>
 	<center>
-		<span style="font-size:42px">Not All Errors Are Made Equal: A Regret Metric for Detecting System-level Trajectory Prediction Failures</span>
+		<span style="font-size:34px">Not All Errors Are Made Equal: <br> A Regret Metric for Detecting System-level Trajectory Prediction Failures</span>
 		<table align=center width=600px>
 			<table align=center width=600px>
 				<tr>
@@ -191,6 +191,17 @@
 
 
 	<center>
+		<table align=center width=850px>
+			<tr>
+				<td>
+					<center>
+						<img class="round" style="width:500px" src="./resources/hardwareCORL2024.png" />
+					</center>	
+				</td>
+			</tr>
+
+		</table>
+
 		<!-- <table align=center width=850px>
 		  <tr>
 			<td width=260px>
@@ -203,6 +214,9 @@
 		  </tr>
 		</table> -->
 		<table align=center width=850px>
+			<center>
+				<h1>Abstract</h1>
+			</center>
 		  <tr>
 			<td>
 			  <br><br> Robot decision-making increasingly relies on data-driven human prediction models when operating around people. 
@@ -335,7 +349,21 @@
 				We utilize  <a
 				href="https://github.com/NVlabs/traffic-behavior-simulation"> closed-loop simulation</a> for reactive human behaviors. The robot's prediction
 				module in an ego-conditioned Agentformer model trained on NuScenes, and we use a cost-based MPC planner with hand-tuned rewards that
-				takes in predictions and outputs robot actions. Out of 100 scenarios, we identified the top p=20 quantile as system-level trajectory prediction failures.
+				takes in predictions and outputs robot actions. The robot was deployed in 100 closed-loop interactions on scenarios from NuScenes.
+			</td>
+		</tr>
+
+				
+		<center>
+		  <h2> Comparison to Baselines</h2>
+		</center>	
+		<tr>
+			<td>		
+				We compared our generalized regret metric (<p style="color: rgb(255,102,0)">GRM</p>) against three baselines: canonical regret
+				(<p style="color: rgb(18, 178, 235)">RM</p>), <p style="color: rgb(112,48,160)">ADE</p> which is a component-level metric, and 
+				Task-relevant Failure Detection from Farid et. al (<p style="color: rgb(0.2, 0.2, 0.2)">TRFD</p>)
+
+				Out of 100 scenarios, we identified the top p=20 quantile as system-level trajectory prediction failures.
 				Different subsets of 17 interactions from the deployment data were then used to fine-tune the Agentformer model and redeployed in closed-loop simulation.
 				<br><br>
 				<center>
