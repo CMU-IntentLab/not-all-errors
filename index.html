@@ -379,7 +379,10 @@
 				inefficient. This illustrates that the mapping to probability space indeed calibrates decisions across disparate contexts. The <span style="color: rgb(112,48,160)">ADE</span> metric 
 				identifies 35% of the same scenarios as the two regret metrics. One scenario uniquely identified by <span style="color: rgb(112,48,160)">ADE</span> is shown above where 
 				the prediction error is dominated by mispredictions of a vehicle in another lane that cannot affect the
-				robot's performance, supporting our claim that component-level metrics are not sufficient for evaluating system-level performance.
+				robot's performance, supporting our claim that component-level metrics are not sufficient for evaluating system-level performance. <span style="color: rgb(0.2, 0.2, 0.2)">TRFD</span> labels
+				<i>every</i> interaction as anomalous, which we hypothesize is due to the distribution shift between real-driving logs and simulated driving behavior. Overall, we find both regret metrics as being able 
+				to consistently identify system-level prediction failures, with our generalized regret metric being less sensitive to deployment context.
+				
 				
 			</td>
 		</tr>
